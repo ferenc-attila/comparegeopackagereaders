@@ -80,7 +80,7 @@ downloaded on 30.03.2022. The point layer is the cities, the line layer is the r
 is the countries. I kept only a text and an integer field for each layer. I exported the prepared data with
 QGIS to another 
 
-![](E:\feren\Development\Java\comparegeopackagereaders\img\ne_10m_map.jpeg "Map of dataset")
+![](.\img\ne_10m_map.jpeg "Map of dataset")
 
 ## Experiences
 

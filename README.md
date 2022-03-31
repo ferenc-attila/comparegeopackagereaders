@@ -17,8 +17,8 @@ when this isn't the best. However, discussing it is not the goal now.
 
 As a QGIS user, I like to use GeoPackages. As a junior Java developer, I  spend much time elaborating to use
 it simply in my codes. Java is not the best software language when you want to develop GIS-based
-applications. All major GIS software (e.g. QGIS, ESRI ArcGIS) use python scripts. If you want to use GIS,
-you have to learn Python. Nevertheless, Java is a great language to develop server-side, backend
+applications. All major GIS software (e.g. QGIS, ESRI ArcGIS) use Python scripts. GIS experts nowadays use
+Python to manipulate their datasets. Nevertheless, Java is a great language to develop server-side, backend
 applications, where, sometimes, you have to work with GIS data. Sometimes it is worth it to handle
 GeoPackage effectively in your server. In my case, I have to import data from GeoPackage into a PostGIS
 database regularly.
@@ -84,9 +84,11 @@ QGIS to another
 
 ## Experiences
 
-The documentation was quite enough for me to understand the basics in both cases. Each tool has Javadoc. The 
-GeoTools library has a long and detailed tutorial, the NGA's one has a short but clear readme markdown in
-their git repository.
+The documentation was quite enough for me to understand the basics in both cases. Each tool has Javadoc.
+The GeoTools library has a long and detailed tutorial, the NGA's one has a short but clear readme markdown
+in their git repository.
+The logic of the implementation is the same in case of both libraries, which is similar to Java JDBC. You
+have to create a connection, a statement contains a query, than you get a result set.
 The NGA's library has much lesser dependency.
 
 __Konkrét számadatok kellenek__
@@ -94,12 +96,18 @@ __Konkrét számadatok kellenek__
 
 None of them used the AutoClosable interface, therefore you can't implement the methods in try-with-resources
 statement. The GeoTools implementation a little more complicated. You will meet a lot of checked exceptions.
-That's why reader class implemented with the NGA artefact is much shorter and the code is readable.
+That's why reader class implemented with the NGA artefact is much shorter and the code is more readable.
+In the code I prepared POJO for the three layers. These have integer attributes for the coordinate reference
+system, storing the [EPSG](https://epsg.org/home.html) identifier. The geometry stored as
+[WKT string](http://wiki.gis.com/wiki/index.php/Well-known_text), and certainly all of them have a long id
+and also a String and an integer attributes for the common fields in the layers.
+
 The repeated test cases based on NGA implementation's classes run much faster on my computer as you can see 
 on the image below:
 
 ## Summary
 
-Often the less is more. The NGA's simple tool is easier to use, faster, and has less dependency. If I only
-need to read GeoPackage layer I will use the NGA's library. If I have to use other tools (I have to handle
-other formats, databases etc.), I will use the slower, more complicated GeoTools library in my code. 
+Both of the libraries are great, well documented and easy to understand the usage. Often the less is more.
+The NGA's simple tool is easier to use, faster, and has less dependency. If I need to read GeoPackage layer
+I will use the NGA's library. If I have to use other tools (I have to handle other formats, databases etc.),
+I will use the slower, more complicated GeoTools library in my code. 

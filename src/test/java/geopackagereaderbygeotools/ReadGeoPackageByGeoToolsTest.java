@@ -1,5 +1,6 @@
 package geopackagereaderbygeotools;
 
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import pojo.Location;
 
@@ -10,20 +11,20 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ReadGeoPackageByGeoToolsTest {
 
-    ReadGeoPackageByGeoTools readGeoPackageByGeoTools = new ReadGeoPackageByGeoTools("src/test/resources/locations.gpkg");
+    ReadGeoPackageByGeoTools readGeoPackageByGeoTools = new ReadGeoPackageByGeoTools("src/test/resources/ne_10m.gpkg");
 
-    @Test
+    @RepeatedTest(1000)
     void getLayersTest() {
-        List<String> layers = List.of("locations");
+        List<String> layers = List.of("ne_10m_countries", "ne_10m_populated_places", "ne_10m_roads");
         assertEquals(layers, readGeoPackageByGeoTools.getLayers());
     }
 
-    @Test
+    @RepeatedTest(1000)
     void getAllFeaturesTest() {
-        List<Location> result = readGeoPackageByGeoTools.getAllFeatures("locations");
-        assertEquals(15, result.size());
-        assertEquals("Trento", result.get(0).getName());
-        assertEquals("POINT (-93.0852 44.9441)", result.get(1).getWktGeometry());
+        List<Location> result = readGeoPackageByGeoTools.getAllFeatures("ne_10m_populated_places");
+        assertEquals(7342, result.size());
+        assertEquals("Colonia del Sacramento", result.get(0).getName());
+        assertEquals("POINT (-56.9009966 -33.5439989)", result.get(1).getWktGeometry());
         assertEquals(4326, result.get(2).getSrsId());
         assertEquals(15L, result.get(14).getId());
     }

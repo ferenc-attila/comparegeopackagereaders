@@ -10,6 +10,7 @@ import pojo.Location;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class ReadGeoPackageByNga {
@@ -27,12 +28,17 @@ public class ReadGeoPackageByNga {
     public List<Location> getAllFeatures(String layerName) {
         List<Location> locations = new ArrayList<>();
         FeatureDao featureDao = geoPackage.getFeatureDao(layerName);
+        iterateOnResultSet(locations, featureDao);
+        return locations;
+    }
+
+    private void iterateOnResultSet(List<Location> locations, FeatureDao featureDao) {
         FeatureResultSet resultSet = featureDao.queryForAll();
+        Iterator<FeatureRow> iterator = resultSet.iterator();
         try {
-            for (FeatureRow row : resultSet) {
-                locations.add(getLocation(resultSet, row));
+            while (iterator.hasNext()) {
+                locations.add(getLocation(resultSet, iterator.next()));
             }
-            return locations;
         } finally {
             resultSet.close();
         }
@@ -44,8 +50,8 @@ public class ReadGeoPackageByNga {
                 row.getId(),
                 resultSet.getGeometry().getSrsId(),
                 geometry.getWkt(),
-                row.getValueString("name"),
-                Integer.parseInt(row.getValueString("number"))
+                row.getValueString("NAME"),
+                Integer.parseInt(row.getValueString("POP_MAX"))
         );
     }
 }

@@ -39,17 +39,23 @@ public class ReadGeoPackageByGeoTools {
 
     private List<Location> getLocationFeatures(SimpleFeatureIterator iterator) {
         List<Location> locations = new ArrayList<>();
-        while (iterator.hasNext()) {
-            SimpleFeature feature = iterator.next();
-            Location actual = new Location(
-                    Long.parseLong(feature.getID().substring(feature.getID().indexOf('.') + 1)),
-                    getSrsId(feature),
-                    feature.getDefaultGeometry().toString(),
-                    feature.getAttribute("name").toString(),
-                    Integer.parseInt(feature.getAttribute("number").toString()));
-            locations.add(actual);
+        try (iterator) {
+            while (iterator.hasNext()) {
+                getLocations(iterator, locations);
+            }
         }
         return locations;
+    }
+
+    private void getLocations(SimpleFeatureIterator iterator, List<Location> locations) {
+        SimpleFeature feature = iterator.next();
+        Location actual = new Location(
+                Long.parseLong(feature.getID().substring(feature.getID().indexOf('.') + 1)),
+                getSrsId(feature),
+                feature.getDefaultGeometry().toString(),
+                feature.getAttribute("NAME").toString(),
+                Integer.parseInt(feature.getAttribute("POP_MAX").toString()));
+        locations.add(actual);
     }
 
     private int getSrsId(SimpleFeature feature) {
@@ -72,7 +78,7 @@ public class ReadGeoPackageByGeoTools {
         try {
             return dataStore.getFeatureSource(layerName);
         } catch (IOException ioe) {
-            throw new IllegalStateException("Cannot create feature source!", ioe);
+            throw new IllegalStateException("Cannot get feature source!", ioe);
         }
     }
 

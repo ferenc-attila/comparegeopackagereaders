@@ -3,6 +3,9 @@
 
 ## Introduction
 
+I'm a freshly graduated junior Java developer, searching for solutions. As a GIS user I work with GeoPackage
+databases every day. This short article born based on my personal curiosity.
+
 [GeoPackage](http://www.geopackage.org/) is a popular format in open source GIS, especially since the
 worthily widespread QGIS selected it as the default vector format in version 3.8. GeoPackage is a
 relatively young format, as it was published in 2014. It is a platform-independent database, implemented

@@ -111,6 +111,7 @@ implementation classes run much faster on my computer, you can see in the follow
 
 | Library  | Value  | Point layer | Polyline layer | Polygon layer | All layers |
 |----------|--------|-------------|----------------|---------------|------------|
+| Features |        |             |                |               |            |
 | GeoTools | Sum    |             |                |               |            |
 | GeoTools | Mean   |             |                |               |            |
 | GeoTools | Median |             |                |               |            |

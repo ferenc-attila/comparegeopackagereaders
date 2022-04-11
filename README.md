@@ -7,7 +7,7 @@ I'm a freshly graduated junior Java developer searching for solutions in my ever
 conservationist. As a QGIS user, I work with GeoPackage databases every day. This short article was born
 based on my curiosity.
 
-[GeoPackage](http://www.geopackage.org/) is a popular format in open source GIS, especially since the
+[GeoPackage](http://www.geopackage.org/) is a popular format in open source GIS, particularly since the
 worthily widespread QGIS selected it as the default vector format in version 3.8. GeoPackage is a relatively
 young format, as it was published in 2014. It is a platform-independent database implemented as an SQLite
 container, which can
@@ -64,7 +64,7 @@ It was released under MIT license.
 ## Method
 
 I implemented a class for each library to read layers from the same gpkg. These classes create POJO
-instances. I wasn't preoccupied with the question of how to write data into GeoPackage. My purpose was to
+instances. I wasn't interested in the question to write data into GeoPackage. My purpose was to
 write a data reader class as simple as possible. I created repeated test cases with Junit5 to measure the
 running time. I didn't make a deep statistical analysis or monitor the computer resources.
 
@@ -121,7 +121,7 @@ implementation classes run much faster on my computer, you can see in the follow
 
 ## Conclusion
 
-Both of the libraries are great, well documented and easy to understand the usage. Nevertheless, often the
-less is more. The NGA's simple tool is easier to use, faster, and has less dependency. If I need to read
-the GeoPackage layer I will use the NGA's library. If I have to use other tools (I have to handle other
-formats, databases etc.), I will maybe use the slower, more complicated GeoTools library in my code.
+Both libraries are great implemetations, well documented and easy to understand the usage. Nevertheless, often the
+less is more. The NGA's simple tool is easier to use, faster, and has lesser dependencies. If I need to read
+a GeoPackage layer, I will use the NGA's library. If I have to use other tools (I have to handle more file
+formats, databases, etc.), I will maybe use the slower, more complicated GeoTools library in my code.
